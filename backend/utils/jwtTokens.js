@@ -5,15 +5,14 @@ export const generateToken = (user, message, statusCode, res) => {
   res
     .status(statusCode)
     .cookie(cookieName, token, {
-      expires: new Date(Date.now() + process.env.COOKIE_EXPIRE * 24 * 60 * 60 * 1000),
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production", // ✅ required for Vercel HTTPS
-      sameSite: "none",                              // ✅ required for cross-site cookies
+      secure: true,          // REQUIRED on Vercel
+      sameSite: "none",      // REQUIRED for cross-site cookies
+      maxAge: process.env.COOKIE_EXPIRE * 24 * 60 * 60 * 1000
     })
     .json({
       success: true,
       message,
-      user,
-      token,
+      user
     });
 };
