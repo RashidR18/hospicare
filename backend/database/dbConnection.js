@@ -1,22 +1,23 @@
 import mongoose from "mongoose";
 
-let isConnected = false;
+let cached = global.mongoose;
+
+if (!cached) {
+  cached = global.mongoose = { conn: null, promise: null };
+}
 
 export const dbConnection = async () => {
-  if (isConnected) {
-    console.log("Using existing database connection");
-    return;
+  if (cached.conn) {
+    return cached.conn;
   }
 
-  try {
-    const db = await mongoose.connect(process.env.MONGO_URI, {
-      dbName: "MERN_STACK_HOSPITAL_MANAGEMENT_SYSTEM"
+  if (!cached.promise) {
+    cached.promise = mongoose.connect(process.env.MONGO_URI, {
+      dbName: "MERN_STACK_HOSPITAL_MANAGEMENT_SYSTEM",
+      bufferCommands: false,
     });
-
-    isConnected = db.connections[0].readyState;
-    console.log("Database connected");
-  } catch (error) {
-    console.error("Database connection failed:", error);
-    throw error;
   }
+
+  cached.conn = await cached.promise;
+  return cached.conn;
 };
