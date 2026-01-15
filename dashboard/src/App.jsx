@@ -13,9 +13,6 @@ import Sidebar from "./components/Sidebar";
 import AddNewAdmin from "./components/AddNewAdmin";
 import "./App.css";
 
-// Base URL points to backend domain + /api/v1
-axios.defaults.baseURL = import.meta.env.VITE_API_URL + "/api/v1";
-axios.defaults.withCredentials = true; // important for cookies
 
 const App = () => {
   const { isAuthenticated, setIsAuthenticated, admin, setAdmin } =
