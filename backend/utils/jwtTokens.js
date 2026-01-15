@@ -6,13 +6,15 @@ export const generateToken = (user, message, statusCode, res) => {
     .status(statusCode)
     .cookie(cookieName, token, {
       httpOnly: true,
-      secure: true,          // REQUIRED (HTTPS only)
-      sameSite: "none",      // REQUIRED (cross-site)
+      secure: true,                 // HTTPS (Vercel)
+      sameSite: "None",             // cross-site cookies
+      domain: "hospicare-one.vercel.app", // 🔥 MUST MATCH LOGOUT
+      path: "/",                    // 🔥 MUST MATCH LOGOUT
       maxAge: 7 * 24 * 60 * 60 * 1000
     })
     .json({
       success: true,
       message,
-      user
+      user,
     });
 };

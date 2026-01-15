@@ -141,7 +141,7 @@ export const logoutAdmin = catchAsyncErrors(async (req, res, next) => {
       secure: true,
       sameSite: "None",
       path: "/",
-      domain: ".vercel.app", // ✅ REQUIRED
+      domain: "hospicare-one.vercel.app", // ✅ REQUIRED
       expires: new Date(0),
     })
     .json({
@@ -161,7 +161,7 @@ export const logoutPatient = catchAsyncErrors(async (req, res, next) => {
       secure: true,
       sameSite: "None",
       path: "/",
-      domain: ".vercel.app", // ✅ REQUIRED
+      domain: "hospicare-one.vercel.app", // ✅ REQUIRED
       expires: new Date(0),
     })
     .json({
