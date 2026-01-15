@@ -138,9 +138,10 @@ export const logoutAdmin = catchAsyncErrors(async (req, res, next) => {
     .status(200)
     .cookie("adminToken", "", {
       httpOnly: true,
-      expires: new Date(0),
-      sameSite: "None",
       secure: true,
+      sameSite: "None",
+      path: "/",
+      expires: new Date(0),
     })
     .json({
       success: true,
@@ -149,20 +150,23 @@ export const logoutAdmin = catchAsyncErrors(async (req, res, next) => {
 });
 
 
-export const logoutPatient =catchAsyncErrors(async(req,res,next)=>{
-    res
-        .status(200)
-        .cookie("patientToken"," ",{
-            httpOnly: true,
-      expires: new Date(0),
-      sameSite: "None",
+
+export const logoutPatient = catchAsyncErrors(async (req, res, next) => {
+  res
+    .status(200)
+    .cookie("patientToken", "", {
+      httpOnly: true,
       secure: true,
-        })
-        .json({
-            success:true,
-            message:"Patient Logged Out Successfully!",
-        });
+      sameSite: "None",
+      path: "/",
+      expires: new Date(0),
+    })
+    .json({
+      success: true,
+      message: "Patient Logged Out Successfully!",
+    });
 });
+
 
 export const addNewDoctor =catchAsyncErrors(async(req,res,next)=>{
     if (!req.files|| Object.keys(req.files).length === 0){
