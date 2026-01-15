@@ -47,8 +47,8 @@ const AppointmentForm = () => {
     try {
       const hasVisitedBool = Boolean(hasVisited);
       const { data } = await axios.post(
-        "http://localhost:4000/api/v1/appointment/post",
-        {
+        `${import.meta.env.VITE_API_URL}/api/v1/appointment/post`,
+        { 
           firstName,
           lastName,
           email,
