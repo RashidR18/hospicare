@@ -141,6 +141,7 @@ export const logoutAdmin = catchAsyncErrors(async (req, res, next) => {
       secure: true,
       sameSite: "None",
       path: "/",
+      domain: ".vercel.app", // ✅ REQUIRED
       expires: new Date(0),
     })
     .json({
@@ -148,6 +149,7 @@ export const logoutAdmin = catchAsyncErrors(async (req, res, next) => {
       message: "Admin Logged Out Successfully!",
     });
 });
+
 
 
 
@@ -159,6 +161,7 @@ export const logoutPatient = catchAsyncErrors(async (req, res, next) => {
       secure: true,
       sameSite: "None",
       path: "/",
+      domain: ".vercel.app", // ✅ REQUIRED
       expires: new Date(0),
     })
     .json({
@@ -166,6 +169,7 @@ export const logoutPatient = catchAsyncErrors(async (req, res, next) => {
       message: "Patient Logged Out Successfully!",
     });
 });
+
 
 
 export const addNewDoctor =catchAsyncErrors(async(req,res,next)=>{
