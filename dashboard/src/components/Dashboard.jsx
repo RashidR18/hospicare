@@ -13,7 +13,7 @@ const Dashboard = () => {
     const fetchAppointments = async () => {
       try {
         const { data } = await axios.get(
-          `${import.meta.env.VITE_API_URL}/appointment/getall`,
+            `${import.meta.env.VITE_API_URL}/api/v1/appointment/getall`,
           { withCredentials: true }
         );
         setAppointments(data.appointments);
