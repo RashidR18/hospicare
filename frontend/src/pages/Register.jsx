@@ -23,7 +23,7 @@ const Register = () => {
     try {
       await axios
         .post(
-          `${import.meta.env.VITE_API_URL}/api/v1/user/patient/register`,
+          `${import.meta.env.VITE_API_URL}/patient/register`,
           { firstName, lastName, email, phone, adhar, dob, gender, password ,role:"Patient"},
           {
             withCredentials: true,
