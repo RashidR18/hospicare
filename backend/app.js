@@ -14,10 +14,9 @@ const app = express();
 app.use(
   cors({
     origin: [
-      process.env.FRONTEND_URL,
-      process.env.DASHBOARD_URL
+      "https://hospicare-b3r7-rgh8td1sf-rashid-alis-projects.vercel.app",
+      "https://hospicare-zsd6-62bs2xgcx-rashid-alis-projects.vercel.app"
     ],
-    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true
   })
 );
