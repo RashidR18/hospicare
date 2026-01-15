@@ -14,12 +14,14 @@ const app = express();
 app.use(
   cors({
     origin: [
-      "https://hospicarefrontend.vercel.app/",
-      "https://hospicaredashboard.vercel.app/login"
+      "https://hospicarefrontend.vercel.app",
+      "https://hospicaredashboard.vercel.app",
+      "http://localhost:5173"
     ],
     credentials: true
   })
 );
+
 
 // Middlewares
 app.use(cookieParser());
