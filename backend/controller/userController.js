@@ -133,25 +133,30 @@ export const getUserDetails=catchAsyncErrors(async(req,res,next)=>{
     });
 });
 
-export const logoutAdmin =catchAsyncErrors(async(req,res,next)=>{
-    res
-        .status(200)
-        .cookie("adminToken"," ",{
-            httpOnly:true,
-            expires:new Date(Date.now()),
-        })
-        .json({
-            success:true,
-            message:"Admin Logged Out Successfully!",
-        });
+export const logoutAdmin = catchAsyncErrors(async (req, res, next) => {
+  res
+    .status(200)
+    .cookie("adminToken", "", {
+      httpOnly: true,
+      expires: new Date(0),
+      sameSite: "None",
+      secure: true,
+    })
+    .json({
+      success: true,
+      message: "Admin Logged Out Successfully!",
+    });
 });
+
 
 export const logoutPatient =catchAsyncErrors(async(req,res,next)=>{
     res
         .status(200)
         .cookie("patientToken"," ",{
-            httpOnly:true,
-            expires:new Date(Date.now()),
+            httpOnly: true,
+      expires: new Date(0),
+      sameSite: "None",
+      secure: true,
         })
         .json({
             success:true,
