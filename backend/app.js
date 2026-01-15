@@ -35,6 +35,13 @@ app.use(
   })
 );
 
+
+app.use((req, res, next) => {
+  console.log("➡️ Incoming:", req.method, req.originalUrl);
+  next();
+});
+
+
 // Routes
 app.use("/api/v1/message", messageRouter);
 app.use("/api/v1/user", userRouter);
