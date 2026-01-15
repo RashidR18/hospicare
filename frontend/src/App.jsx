@@ -22,7 +22,7 @@ const App = () => {
     const fetchUser = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/patient/me`,
+          `${import.meta.env.VITE_API_URL}/user/patient/me`,
           {
             withCredentials: true,
           }

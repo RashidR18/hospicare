@@ -12,7 +12,7 @@ const Navbar = () => {
   const handleLogout = async () => {
     
     await axios
-      .get(`${import.meta.env.VITE_API_URL}/patient/logout`, {
+      .get(`${import.meta.env.VITE_API_URL}/user/patient/logout`, {
         withCredentials: true,
       })
       .then((res) => {

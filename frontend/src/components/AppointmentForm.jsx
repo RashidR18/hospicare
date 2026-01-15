@@ -34,7 +34,7 @@ const AppointmentForm = () => {
   useEffect(() => {
     const fetchDoctors = async () => {
       const { data } = await axios.get(
-        `${import.meta.env.VITE_API_URL}/api/v1/user/doctors`,
+        `${import.meta.env.VITE_API_URL}/user/doctors`,
         { withCredentials: true }
       );
       setDoctors(data.doctors);
