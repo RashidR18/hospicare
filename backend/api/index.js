@@ -1,10 +1,12 @@
+// /api/index.js
 import app from "../app.js";
-import cloudinary from "cloudinary";
 import { dbConnection } from "../database/dbConnection.js";
+import cloudinary from "cloudinary";
 
 let isConnected = false;
 
-async function connectOnce() {
+// Connect DB and Cloudinary once at cold start
+async function init() {
   if (!isConnected) {
     await dbConnection();
     isConnected = true;
@@ -17,7 +19,8 @@ async function connectOnce() {
   }
 }
 
-export default async function handler(req, res) {
-  await connectOnce();
-  return app(req, res);
-}
+// Immediately run init() (cold start)
+init().catch(err => console.error("Init error:", err));
+
+// Export the Express app for Vercel
+export default app;
