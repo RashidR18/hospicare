@@ -18,8 +18,8 @@ const Login = () => {
     try {
       await axios
         .post(
-          `${import.meta.env.VITE_API_URL}/user/login`,
-          { email, password, confirmPassword, role: "Admin" },
+           `${import.meta.env.VITE_API_URL}/user/login`,
+          { email, password, role: "Admin" },
           {
             withCredentials: true,
             headers: { "Content-Type": "application/json" },
