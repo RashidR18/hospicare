@@ -5,14 +5,13 @@ import { Context } from "../main";
 import { Link, useNavigate, Navigate } from "react-router-dom";
 
 const Login = () => {
-  const { isAuthenticated, setIsAuthenticated, setUser } =
-    useContext(Context);
+  const { isAuthenticated, setIsAuthenticated, setUser, setToken } = useContext(Context);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const navigateTo = useNavigate();
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -27,33 +26,33 @@ const Login = () => {
           role: "Patient",
         },
         {
-          withCredentials: true, // 🔥 REQUIRED
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
         }
       );
 
       toast.success(res.data.message);
 
-      // 🔥 CRITICAL FOR MOBILE
+      // 🔥 Store user and token in context (and optionally localStorage)
       setIsAuthenticated(true);
       setUser(res.data.user);
+
+      if (setToken) {
+        setToken(res.data.token); // store token in context
+      }
+      localStorage.setItem("token", res.data.token); // optional for refresh
 
       // Clear form
       setEmail("");
       setPassword("");
       setConfirmPassword("");
 
-      navigateTo("/");
-    } catch (error) {
-      toast.error(
-        error?.response?.data?.message || "Login failed"
-      );
+      navigate("/");
+    } catch (err) {
+      toast.error(err?.response?.data?.message || "Login failed");
     }
   };
 
-  // 🔐 Prevent accessing login page if already logged in
+  // 🔐 Redirect if already logged in
   if (isAuthenticated) {
     return <Navigate to="/" />;
   }

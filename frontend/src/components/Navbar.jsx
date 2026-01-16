@@ -1,35 +1,25 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { Context } from "../main";
 
 const Navbar = () => {
   const [show, setShow] = useState(false);
-  const { isAuthenticated, setIsAuthenticated, setUser } =
-    useContext(Context);
+  const { isAuthenticated, setIsAuthenticated, setUser, setToken } = useContext(Context);
 
   const navigate = useNavigate();
 
-  const handleLogout = async () => {
-    try {
-      const res = await axios.get(
-        `${import.meta.env.VITE_API_URL}/user/patient/logout`,
-        { withCredentials: true }
-      );
+  // 🔥 HEADER-BASED LOGOUT
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    setUser({});
+    if (setToken) setToken(null); // clear token in context
+    localStorage.removeItem("token"); // clear token in localStorage
 
-      toast.success(res.data.message);
-
-      // 🔥 VERY IMPORTANT
-      setIsAuthenticated(false);
-      setUser({});
-      setShow(false);
-
-      navigate("/login");
-    } catch (err) {
-      toast.error(err?.response?.data?.message || "Logout failed");
-    }
+    toast.success("Logged out successfully!");
+    setShow(false);
+    navigate("/login");
   };
 
   const goToLogin = () => {
@@ -40,13 +30,7 @@ const Navbar = () => {
   return (
     <nav className="container">
       <div className="logo">
-        <img
-          src="/logo.png"
-          alt="logo"
-          className="logo-img"
-          height={100}
-          width={200}
-        />
+        <img src="/logo.png" alt="logo" className="logo-img" height={100} width={200} />
       </div>
 
       <div className={show ? "navLinks showmenu" : "navLinks"}>
