@@ -136,13 +136,11 @@ export const getUserDetails=catchAsyncErrors(async(req,res,next)=>{
 export const logoutAdmin = catchAsyncErrors(async (req, res, next) => {
   res
     .status(200)
-    .cookie("adminToken", "", {
+    .clearCookie("adminToken", {
       httpOnly: true,
       secure: true,
       sameSite: "None",
       path: "/",
-      domain: "hospicare-one.vercel.app", // ✅ REQUIRED
-      expires: new Date(0),
     })
     .json({
       success: true,
@@ -156,19 +154,18 @@ export const logoutAdmin = catchAsyncErrors(async (req, res, next) => {
 export const logoutPatient = catchAsyncErrors(async (req, res, next) => {
   res
     .status(200)
-    .cookie("patientToken", "", {
+    .clearCookie("patientToken", {
       httpOnly: true,
       secure: true,
       sameSite: "None",
       path: "/",
-      domain: "hospicare-one.vercel.app", // ✅ REQUIRED
-      expires: new Date(0),
     })
     .json({
       success: true,
       message: "Patient Logged Out Successfully!",
     });
 });
+
 
 
 
