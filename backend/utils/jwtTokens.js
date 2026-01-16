@@ -8,7 +8,7 @@ export const generateToken = (user, message, statusCode, res) => {
       httpOnly: true,
       secure: true,                 // HTTPS (Vercel)
       sameSite: "None",             // cross-site cookies
-      domain: "hospicare-one.vercel.app", // 🔥 MUST MATCH LOGOUT
+      
       path: "/",                    // 🔥 MUST MATCH LOGOUT
       maxAge: 7 * 24 * 60 * 60 * 1000
     })
