@@ -18,24 +18,27 @@ const App = () => {
   const { isAuthenticated, setIsAuthenticated, setUser } =
     useContext(Context);
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/user/patient/me`,
-          {
-            withCredentials: true,
-          }
-        );
-        setIsAuthenticated(true);
-        setUser(response.data.user);
-      } catch (error) {
-        setIsAuthenticated(false);
-        setUser({});
-      }
-    };
-    fetchUser();
-  },[] );
+useEffect(() => {
+  if (isAuthenticated) return;
+
+  const fetchUser = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/user/patient/me`,
+        { withCredentials: true }
+      );
+      setIsAuthenticated(true);
+      setUser(response.data.user);
+    } catch (error) {
+      setIsAuthenticated(false);
+      setUser({});
+    }
+  };
+
+  const timer = setTimeout(fetchUser, 300);
+  return () => clearTimeout(timer);
+}, [isAuthenticated]);
+
 
 
 
