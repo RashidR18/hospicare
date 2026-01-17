@@ -1,63 +1,80 @@
-import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { TiHome } from "react-icons/ti";
+import { RiLogoutBoxFill } from "react-icons/ri";
+import { AiFillMessage } from "react-icons/ai";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { FaUserDoctor } from "react-icons/fa6";
+import { MdAddModerator } from "react-icons/md";
+import { IoPersonAddSharp } from "react-icons/io5";
+import axios from "axios";
+import { toast } from "react-toastify";
 import { Context } from "../main";
-import "./Sidebar.css"; // assuming you have some CSS for sidebar
+import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
-  const { isAuthenticated, admin, setIsAuthenticated, setAdmin, setToken } =
-    useContext(Context);
-  const navigate = useNavigate();
+  const [show, setShow] = useState(false);
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    setToken(null);
-    setAdmin({});
-    setIsAuthenticated(false);
-    navigate("/login");
+  const { isAuthenticated, setIsAuthenticated } = useContext(Context);
+
+  const handleLogout = async () => {
+    await axios
+      .get(  `${import.meta.env.VITE_API_URL}/api/v1/user/admin/logout`, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        toast.success(res.data.message);
+        setIsAuthenticated(false);
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      });
+  };
+
+  const navigateTo = useNavigate();
+
+  const gotoHomePage = () => {
+    navigateTo("/");
+    setShow(!show);
+  };
+  const gotoDoctorsPage = () => {
+    navigateTo("/doctors");
+    setShow(!show);
+  };
+  const gotoMessagesPage = () => {
+    navigateTo("/messages");
+    setShow(!show);
+  };
+  const gotoAddNewDoctor = () => {
+    navigateTo("/doctor/addnew");
+    setShow(!show);
+  };
+  const gotoAddNewAdmin = () => {
+    navigateTo("/admin/addnew");
+    setShow(!show);
   };
 
   return (
-    <aside className="sidebar">
-      <div className="sidebar-header">
-        <img src="/logo.png" alt="Hospicare Logo" className="sidebar-logo" />
-        <h2>Hospicare Admin</h2>
-      </div>
-
-      {isAuthenticated ? (
-        <>
-          <nav className="sidebar-nav">
-            <ul>
-              <li>
-                <Link to="/">Dashboard</Link>
-              </li>
-              <li>
-                <Link to="/doctor/addnew">Add New Doctor</Link>
-              </li>
-              <li>
-                <Link to="/admin/addnew">Add New Admin</Link>
-              </li>
-              <li>
-                <Link to="/doctors">Doctors</Link>
-              </li>
-              <li>
-                <Link to="/messages">Messages</Link>
-              </li>
-            </ul>
-          </nav>
-
-          <div className="sidebar-footer">
-            <p>Logged in as: {admin?.name || "Admin"}</p>
-            <button className="logout-btn" onClick={handleLogout}>
-              Logout
-            </button>
-          </div>
-        </>
-      ) : (
-        <div className="sidebar-login">
-          <p>Please <Link to="/login">login</Link> to access the dashboard</p>
+    <>
+      <nav
+        style={!isAuthenticated ? { display: "none" } : { display: "flex" }}
+        className={show ? "show sidebar" : "sidebar"}
+      >
+        <div className="links">
+          <TiHome onClick={gotoHomePage} />
+          <FaUserDoctor onClick={gotoDoctorsPage} />
+          <MdAddModerator onClick={gotoAddNewAdmin} />
+          <IoPersonAddSharp onClick={gotoAddNewDoctor} />
+          <AiFillMessage onClick={gotoMessagesPage} />
+          <RiLogoutBoxFill onClick={handleLogout} />
         </div>
-      )}
-    </aside>
+      </nav>
+      <div
+        className="wrapper"
+        style={!isAuthenticated ? { display: "none" } : { display: "flex" }}
+      >
+        <GiHamburgerMenu className="hamburger" onClick={() => setShow(!show)} />
+      </div>
+    </>
   );
 };
 
