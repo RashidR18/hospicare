@@ -6,7 +6,6 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { FaUserDoctor } from "react-icons/fa6";
 import { MdAddModerator } from "react-icons/md";
 import { IoPersonAddSharp } from "react-icons/io5";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { Context } from "../main";
 import { useNavigate } from "react-router-dom";
@@ -14,23 +13,21 @@ import { useNavigate } from "react-router-dom";
 const Sidebar = () => {
   const [show, setShow] = useState(false);
 
-  const { isAuthenticated, setIsAuthenticated } = useContext(Context);
-
-  const handleLogout = async () => {
-    await axios
-      .get(  `${import.meta.env.VITE_API_URL}/api/v1/user/admin/logout`, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        toast.success(res.data.message);
-        setIsAuthenticated(false);
-      })
-      .catch((err) => {
-        toast.error(err.response.data.message);
-      });
-  };
+  const { isAuthenticated, setIsAuthenticated, setToken } = useContext(Context);
 
   const navigateTo = useNavigate();
+
+  const handleLogout = () => {
+    try {
+      localStorage.removeItem("token"); // remove token
+      setToken(null);                   // clear token in context
+      setIsAuthenticated(false);        // update auth status
+      toast.success("Logged out successfully!");
+      navigateTo("/login");             // redirect to login
+    } catch (err) {
+      toast.error("Logout failed");
+    }
+  };
 
   const gotoHomePage = () => {
     navigateTo("/");
