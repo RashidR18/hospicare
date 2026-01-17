@@ -37,9 +37,12 @@ const Login = () => {
       setUser(res.data.user);
 
       if (setToken) {
-        setToken(res.data.token); // store token in context
+        localStorage.setItem("token", res.data.token);
+setIsAuthenticated(true);
+setUser(res.data.user);
+
       }
-      localStorage.setItem("token", res.data.token); // optional for refresh
+      
 
       // Clear form
       setEmail("");

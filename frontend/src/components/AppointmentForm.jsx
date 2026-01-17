@@ -1,10 +1,9 @@
 import axios from "axios";
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { Context } from "../main";
 
 const AppointmentForm = () => {
-  const { token } = useContext(Context); // 🔥 Get token from context
+  const token = localStorage.getItem("token"); // ✅ SINGLE SOURCE OF TRUTH
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
