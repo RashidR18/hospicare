@@ -94,56 +94,49 @@ const Dashboard = () => {
             </tr>
           </thead>
           <tbody>
-  {appointments.length > 0 ? (
-    appointments.map((appointment) => (
-      <tr key={appointment._id}>
-        <td colSpan="6" className="row-scroll-wrapper">
-          <div className="row-scroll">
-            <div className="cell">{appointment.firstName} {appointment.lastName}</div>
-            <div className="cell">{appointment.appointment_date.substring(0, 16)}</div>
-            <div className="cell">
-              {appointment.doctor.firstName} {appointment.doctor.lastName}
-            </div>
-            <div className="cell">{appointment.department}</div>
-            <div className="cell">
-              <select
-                className={
-                  appointment.status === "Pending"
-                    ? "value-pending"
-                    : appointment.status === "Accepted"
-                    ? "value-accepted"
-                    : "value-rejected"
-                }
-                value={appointment.status}
-                onChange={(e) =>
-                  handleUpdateStatus(appointment._id, e.target.value)
-                }
-              >
-                <option value="Pending">Pending</option>
-                <option value="Accepted">Accepted</option>
-                <option value="Rejected">Rejected</option>
-              </select>
-            </div>
-            <div className="cell">
-              {appointment.hasVisited ? (
-                <GoCheckCircleFill className="green" />
-              ) : (
-                <AiFillCloseCircle className="red" />
-              )}
-            </div>
-          </div>
-        </td>
-      </tr>
-    ))
-  ) : (
-    <tr>
-      <td colSpan="6" style={{ textAlign: "center" }}>
-        No Appointments Found!
-      </td>
-    </tr>
-  )}
-</tbody>
-
+            {appointments.length > 0 ? (
+              appointments.map((appointment) => (
+                <tr key={appointment._id}>
+                  <td>{`${appointment.firstName} ${appointment.lastName}`}</td>
+                  <td>{appointment.appointment_date.substring(0, 16)}</td>
+                  <td>{`${appointment.doctor.firstName} ${appointment.doctor.lastName}`}</td>
+                  <td>{appointment.department}</td>
+                  <td>
+                    <select
+                      className={
+                        appointment.status === "Pending"
+                          ? "value-pending"
+                          : appointment.status === "Accepted"
+                          ? "value-accepted"
+                          : "value-rejected"
+                      }
+                      value={appointment.status}
+                      onChange={(e) =>
+                        handleUpdateStatus(appointment._id, e.target.value)
+                      }
+                    >
+                      <option value="Pending" className="value-pending">Pending</option>
+                      <option value="Accepted" className="value-accepted">Accepted</option>
+                      <option value="Rejected" className="value-rejected">Rejected</option>
+                    </select>
+                  </td>
+                  <td>
+                    {appointment.hasVisited ? (
+                      <GoCheckCircleFill className="green" />
+                    ) : (
+                      <AiFillCloseCircle className="red" />
+                    )}
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="6" style={{ textAlign: "center" }}>
+                  No Appointments Found!
+                </td>
+              </tr>
+            )}
+          </tbody>
         </table>
       </div>
     </section>
