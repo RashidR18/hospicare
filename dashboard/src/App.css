@@ -161,10 +161,8 @@ body {
   gap: 20px;
 }
 
-/* First Banner */
 .dashboard .banner.first-banner {
-  flex-direction: row;
-  align-items: center;
+  height: auto;
   background: #b5b5ff;
   border-radius: 20px;
   padding: 20px;
@@ -176,51 +174,25 @@ body {
   display: flex;
   align-items: center;
   gap: 20px;
-  width: 100%;
-  max-width: 900px;
 }
 
-.admin-avatar {
+.dashboard .banner.first-banner .firstBox img {
   width: 150px;
   height: 150px;
   border-radius: 12px;
-  object-fit: cover;
 }
 
-.content {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.greeting {
+.dashboard .banner.first-banner .content div {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.greeting p {
-  font-size: 18px;
-  font-weight: 500;
-  margin: 0;
-}
-
-.greeting h5 {
+.dashboard .banner.first-banner .content h5 {
   color: #ff008d;
-  font-size: 20px;
-  margin: 0;
-  font-weight: 700;
+  font-size: 1.25rem;
 }
 
-.welcome-msg {
-  font-size: 16px;
-  color: #111;
-  margin-top: 5px;
-}
-
-/* =======================
-   APPOINTMENTS BANNER
-======================= */
 .dashboard .banner.appointments-banner {
   background: #fff;
   border-radius: 20px;
@@ -233,9 +205,6 @@ body {
   margin-bottom: 15px;
 }
 
-/* =======================
-   TABLE (DESKTOP)
-======================= */
 .dashboard .banner table {
   width: 100%;
   border-collapse: collapse;
@@ -254,12 +223,10 @@ body {
   font-weight: 600;
   width: 100%;
   border: none;
-  background: transparent;
-  cursor: pointer;
 }
 
 .dashboard table td svg {
-  display: block;
+  display: flex;
   margin: 0 auto;
 }
 
@@ -276,47 +243,46 @@ body {
 .dashboard table .value-pending {
   color: #eab308;
 }
-
 .dashboard table .value-accepted {
   color: #16a34a;
 }
-
 .dashboard table .value-rejected {
   color: #dc2626;
 }
 
-/* =======================
-   MOBILE RESPONSIVE FIX
-======================= */
+/* -------- Mobile Responsive Table -------- */
 @media (max-width: 768px) {
+  .dashboard .banner table {
+    display: block;
+    overflow-x: auto;
+  }
 
-  /* Hide table header */
   .dashboard .banner table thead {
     display: none;
   }
 
-  /* KEEP table structure intact */
-  .dashboard .banner table {
-    display: table;
+  .dashboard .banner table tbody,
+  .dashboard .banner table tr,
+  .dashboard .banner table td {
+    display: block;
     width: 100%;
   }
 
   .dashboard .banner table tr {
-    display: table-row;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ddd;
   }
 
-  /* Only td becomes flex */
   .dashboard .banner table td {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-    padding: 12px 0;
+    padding: 10px 0;
     font-size: 14px;
     border-bottom: 1px solid #eee;
   }
 
-  .dashboard .banner table td::before {
+  .dashboard .banner table td:before {
     content: attr(data-label);
     font-weight: 700;
     color: #555;
@@ -330,19 +296,16 @@ body {
   }
 }
 
-/* =======================
-   EXTRA SMALL DEVICES
-======================= */
 @media (max-width: 480px) {
   .dashboard .banner table td {
     flex-direction: column;
     align-items: flex-start;
-    gap: 6px;
+    gap: 5px;
     font-size: 13px;
   }
 
-  .dashboard .banner table td::before {
-    width: auto;
+  .dashboard .banner table td:before {
+    width: 100px;
     font-size: 13px;
   }
 
@@ -350,8 +313,6 @@ body {
     font-size: 12px;
   }
 }
-
-
 
 
 .sidebar {
