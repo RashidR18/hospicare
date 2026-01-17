@@ -61,19 +61,17 @@ const Dashboard = () => {
   }
 
   return (
-    <section className="dashboard page">
-      <div className="banner first-banner">
-        <div className="firstBox">
-          <img src="/doc.png" alt="docImg" />
-          <div className="content">
-            <div>
-              <p>Hello ,</p>
-              <h5>{admin && `${admin.firstName} ${admin.lastName}`}</h5>
-            </div>
-            <p>You Are Landed On Admin Dashboard.</p>
-          </div>
-        </div>
+    <section className="banner first-banner">
+  <div className="firstBox">
+    <img src="/doc.png" alt="Admin Avatar" className="admin-avatar" />
+    <div className="content">
+      <div className="greeting">
+        <p>Hello,</p>
+        <h5>{admin ? `${admin.firstName} ${admin.lastName}` : "Admin"}</h5>
       </div>
+      <p className="welcome-msg">You have landed on the Admin Dashboard.</p>
+    </div>
+  </div>
 
       <div className="banner appointments-banner">
         <h5>Appointments</h5>
