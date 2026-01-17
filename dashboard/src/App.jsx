@@ -1,52 +1,72 @@
-import React, { useContext, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React, { useContext } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
 import Login from "./components/Login";
 import AddNewDoctor from "./components/AddNewDoctor";
 import Messages from "./components/Messages";
 import Doctors from "./components/Doctors";
+import AddNewAdmin from "./components/AddNewAdmin";
+import Sidebar from "./components/Sidebar";
 import { Context } from "./main";
-import axios from "axios";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Sidebar from "./components/Sidebar";
-import AddNewAdmin from "./components/AddNewAdmin";
 import "./App.css";
 
+// Protected route component
+const ProtectedRoute = ({ children }) => {
+  const { isAuthenticated } = useContext(Context);
+  if (!isAuthenticated) {
+    return <Navigate to="/login" />;
+  }
+  return children;
+};
 
 const App = () => {
-  const { isAuthenticated, setIsAuthenticated, admin, setAdmin } =
-    useContext(Context);
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const response = await axios.get(
-             `${import.meta.env.VITE_API_URL}/api/v1/user/admin/me`,
-          {
-            withCredentials: true,
-          }
-        );
-        setIsAuthenticated(true);
-        setAdmin(response.data.user);
-      } catch (error) {
-        setIsAuthenticated(false);
-        setAdmin({});
-      }
-    };
-    fetchUser();
-  }, []);
-
   return (
     <Router>
       <Sidebar />
       <Routes>
-        <Route path="/" element={<Dashboard />} />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/login" element={<Login />} />
-        <Route path="/doctor/addnew" element={<AddNewDoctor />} />
-        <Route path="/admin/addnew" element={<AddNewAdmin />} />
-        <Route path="/messages" element={<Messages />} />
-        <Route path="/doctors" element={<Doctors />} />
+        <Route
+          path="/doctor/addnew"
+          element={
+            <ProtectedRoute>
+              <AddNewDoctor />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/addnew"
+          element={
+            <ProtectedRoute>
+              <AddNewAdmin />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/messages"
+          element={
+            <ProtectedRoute>
+              <Messages />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/doctors"
+          element={
+            <ProtectedRoute>
+              <Doctors />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
       <ToastContainer position="top-center" />
     </Router>
