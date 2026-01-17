@@ -7,42 +7,31 @@ import { GoCheckCircleFill } from "react-icons/go";
 import { AiFillCloseCircle } from "react-icons/ai";
 
 const Dashboard = () => {
-  const { isAuthenticated, token, admin } = useContext(Context);
   const [appointments, setAppointments] = useState([]);
+  const { isAuthenticated, admin } = useContext(Context);
 
   useEffect(() => {
     const fetchAppointments = async () => {
-      if (!token) return;
       try {
         const { data } = await axios.get(
           `${import.meta.env.VITE_API_URL}/api/v1/appointment/getall`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
+          { withCredentials: true }
         );
         setAppointments(data.appointments);
       } catch (error) {
-        toast.error(error.response?.data?.message || "Failed to fetch appointments");
         setAppointments([]);
       }
     };
     fetchAppointments();
-  }, [token]);
+  }, []);
 
   const handleUpdateStatus = async (appointmentId, status) => {
     try {
       const { data } = await axios.put(
         `${import.meta.env.VITE_API_URL}/api/v1/appointment/update/${appointmentId}`,
         { status },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+        { withCredentials: true }
       );
-
       setAppointments((prevAppointments) =>
         prevAppointments.map((appointment) =>
           appointment._id === appointmentId
@@ -52,27 +41,31 @@ const Dashboard = () => {
       );
       toast.success(data.message);
     } catch (error) {
-      toast.error(error.response?.data?.message || "Failed to update status");
+      toast.error(error.response?.data?.message || "Update failed");
     }
   };
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" />;
+    return <Navigate to={"/login"} />;
   }
 
   return (
-    <section className="banner first-banner">
-  <div className="firstBox">
-    <img src="/doc.png" alt="Admin Avatar" className="admin-avatar" />
-    <div className="content">
-      <div className="greeting">
-        <p>Hello,</p>
-        <h5>{admin ? `${admin.firstName} ${admin.lastName}` : "Admin"}</h5>
+    <section className="dashboard page">
+      {/* First Banner */}
+      <div className="banner first-banner">
+        <div className="firstBox">
+          <img src="/doc.png" alt="Admin Avatar" className="admin-avatar" />
+          <div className="content">
+            <div className="greeting">
+              <p>Hello,</p>
+              <h5>{admin ? `${admin.firstName} ${admin.lastName}` : "Admin"}</h5>
+            </div>
+            <p className="welcome-msg">You have landed on the Admin Dashboard.</p>
+          </div>
+        </div>
       </div>
-      <p className="welcome-msg">You have landed on the Admin Dashboard.</p>
-    </div>
-  </div>
 
+      {/* Appointments Table */}
       <div className="banner appointments-banner">
         <h5>Appointments</h5>
         <table>

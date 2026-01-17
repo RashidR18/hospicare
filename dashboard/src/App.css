@@ -161,8 +161,10 @@ body {
   gap: 20px;
 }
 
+/* First Banner */
 .dashboard .banner.first-banner {
-  height: auto;
+  flex-direction: row;
+  align-items: center;
   background: #b5b5ff;
   border-radius: 20px;
   padding: 20px;
@@ -174,25 +176,49 @@ body {
   display: flex;
   align-items: center;
   gap: 20px;
+  width: 100%;
+  max-width: 900px;
 }
 
-.dashboard .banner.first-banner .firstBox img {
+.admin-avatar {
   width: 150px;
   height: 150px;
   border-radius: 12px;
+  object-fit: cover;
 }
 
-.dashboard .banner.first-banner .content div {
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.greeting {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.dashboard .banner.first-banner .content h5 {
-  color: #ff008d;
-  font-size: 1.25rem;
+.greeting p {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
 }
 
+.greeting h5 {
+  color: #ff008d;
+  font-size: 20px;
+  margin: 0;
+  font-weight: 700;
+}
+
+.welcome-msg {
+  font-size: 16px;
+  color: #111;
+  margin-top: 5px;
+}
+
+/* Appointments Table Banner */
 .dashboard .banner.appointments-banner {
   background: #fff;
   border-radius: 20px;
@@ -243,15 +269,38 @@ body {
 .dashboard table .value-pending {
   color: #eab308;
 }
+
 .dashboard table .value-accepted {
   color: #16a34a;
 }
+
 .dashboard table .value-rejected {
   color: #dc2626;
 }
 
-/* -------- Mobile Responsive Table -------- */
+/* Mobile Responsive Table */
 @media (max-width: 768px) {
+  .dashboard .banner.first-banner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .admin-avatar {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 10px;
+  }
+
+  .greeting h5 {
+    font-size: 18px;
+  }
+
+  .greeting p,
+  .welcome-msg {
+    font-size: 14px;
+  }
+
   .dashboard .banner table {
     display: block;
     overflow-x: auto;
@@ -313,6 +362,7 @@ body {
     font-size: 12px;
   }
 }
+
 
 
 .sidebar {
