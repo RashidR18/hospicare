@@ -338,6 +338,53 @@ body {
     justify-content: center;
   }
 }
+/* Desktop – normal table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Row scroll wrapper */
+.row-scroll-wrapper {
+  padding: 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Horizontal scroll container */
+.row-scroll {
+  display: grid;
+  grid-template-columns: 
+    160px 160px 160px 140px 140px 100px;
+  gap: 12px;
+  padding: 12px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+/* Individual cell */
+.row-scroll .cell {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+/* Hide scrollbar but keep scroll */
+.row-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+.row-scroll::-webkit-scrollbar-thumb {
+  background: #cbd5f5;
+  border-radius: 6px;
+}
+
+/* Mobile only */
+@media (min-width: 769px) {
+  .row-scroll {
+    overflow-x: visible;
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
 
 .sidebar {
   position: fixed;
