@@ -1,6 +1,8 @@
 import express from "express";
 import { addNewAdmin, addNewDoctor, getAllDoctors, getUserDetails, login, logoutAdmin, logoutPatient, patientRegister } from "../controller/userController.js";
 import {isAdminAuthenticated,isPatientAuthenticated,} from "../middlewares/auth.js";
+import { isAuthenticated } from "../middlewares/isAuthenticated.js";
+
 const router=express.Router();
 
 // Ping / test route
@@ -11,7 +13,7 @@ router.get("/", (req, res) => {
 router.post("/patient/register", patientRegister);
 router.post("/login", login);
 router.post("/admin/addnew",isAdminAuthenticated, addNewAdmin);
-router.get("/doctors",getAllDoctors);
+router.get("/doctors", isAuthenticated, getAllDoctors);
 router.get("/admin/me",isAdminAuthenticated, getUserDetails);
 router.get("/patient/me",isPatientAuthenticated, getUserDetails);
 router.get("/admin/logout",isAdminAuthenticated, logoutAdmin);
