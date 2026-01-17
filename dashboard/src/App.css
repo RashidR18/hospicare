@@ -338,38 +338,30 @@ body {
     justify-content: center;
   }
 }
-/* ===== MOBILE ROW-WISE SCROLLER ===== */
+/* =========================
+   RESPONSIVE TABLE (SAFE)
+========================= */
+
 @media (max-width: 768px) {
 
-  table {
+  .appointments-banner {
+    overflow-x: auto;
+  }
+
+  .appointments-banner table {
+    width: 100%;
+    min-width: 650px;
     border-collapse: collapse;
   }
 
-  thead {
-    display: none;
-  }
-
-  tbody tr {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-    border-bottom: 1px solid #e5e7eb;
-    margin-bottom: 12px;
-  }
-
-  tbody td {
-    display: inline-block;
-    min-width: 160px;
-    padding: 10px;
+  .appointments-banner th,
+  .appointments-banner td {
     font-size: 14px;
-    vertical-align: middle;
-  }
-
-  tbody td:last-child {
-    min-width: 80px;
-    text-align: center;
+    padding: 10px;
+    white-space: nowrap;
   }
 }
+
 
 
 
