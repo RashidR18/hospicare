@@ -7,13 +7,12 @@ import { GoCheckCircleFill } from "react-icons/go";
 import { AiFillCloseCircle } from "react-icons/ai";
 
 const Dashboard = () => {
+  const { isAuthenticated, token, admin } = useContext(Context);
   const [appointments, setAppointments] = useState([]);
-  const { isAuthenticated, admin, token } = useContext(Context);
 
   useEffect(() => {
     const fetchAppointments = async () => {
-      if (!token) return; // skip if not authenticated
-
+      if (!token) return;
       try {
         const { data } = await axios.get(
           `${import.meta.env.VITE_API_URL}/api/v1/appointment/getall`,
@@ -29,13 +28,10 @@ const Dashboard = () => {
         setAppointments([]);
       }
     };
-
     fetchAppointments();
-  }, [token]); // re-fetch if token changes
+  }, [token]);
 
   const handleUpdateStatus = async (appointmentId, status) => {
-    if (!token) return;
-
     try {
       const { data } = await axios.put(
         `${import.meta.env.VITE_API_URL}/api/v1/appointment/update/${appointmentId}`,
@@ -54,7 +50,6 @@ const Dashboard = () => {
             : appointment
         )
       );
-
       toast.success(data.message);
     } catch (error) {
       toast.error(error.response?.data?.message || "Failed to update status");
@@ -67,20 +62,20 @@ const Dashboard = () => {
 
   return (
     <section className="dashboard page">
-      <div className="banner">
+      <div className="banner first-banner">
         <div className="firstBox">
           <img src="/doc.png" alt="docImg" />
           <div className="content">
             <div>
-              <p>Hello,</p>
+              <p>Hello ,</p>
               <h5>{admin && `${admin.firstName} ${admin.lastName}`}</h5>
             </div>
-            <p>U Are Landed On Admin DashBoard.</p>
+            <p>You Are Landed On Admin Dashboard.</p>
           </div>
         </div>
       </div>
 
-      <div className="banner">
+      <div className="banner appointments-banner">
         <h5>Appointments</h5>
         <table>
           <thead>
@@ -97,11 +92,11 @@ const Dashboard = () => {
             {appointments.length > 0 ? (
               appointments.map((appointment) => (
                 <tr key={appointment._id}>
-                  <td>{`${appointment.firstName} ${appointment.lastName}`}</td>
-                  <td>{appointment.appointment_date.substring(0, 16)}</td>
-                  <td>{`${appointment.doctor.firstName} ${appointment.doctor.lastName}`}</td>
-                  <td>{appointment.department}</td>
-                  <td>
+                  <td data-label="Patient">{`${appointment.firstName} ${appointment.lastName}`}</td>
+                  <td data-label="Date">{appointment.appointment_date.substring(0, 16)}</td>
+                  <td data-label="Doctor">{`${appointment.doctor.firstName} ${appointment.doctor.lastName}`}</td>
+                  <td data-label="Department">{appointment.department}</td>
+                  <td data-label="Status">
                     <select
                       className={
                         appointment.status === "Pending"
@@ -120,7 +115,7 @@ const Dashboard = () => {
                       <option value="Rejected" className="value-rejected">Rejected</option>
                     </select>
                   </td>
-                  <td>
+                  <td data-label="Visited">
                     {appointment.hasVisited ? (
                       <GoCheckCircleFill className="green" />
                     ) : (

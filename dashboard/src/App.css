@@ -160,184 +160,160 @@ body {
   flex-direction: column;
   gap: 20px;
 }
-.dashboard .banner:first-child {
-  height: 35vh;
+
+.dashboard .banner.first-banner {
+  height: auto;
+  background: #b5b5ff;
+  border-radius: 20px;
+  padding: 20px;
   display: flex;
   gap: 20px;
 }
-.dashboard .banner:first-child .firstBox {
-  flex: 2;
+
+.dashboard .banner.first-banner .firstBox {
   display: flex;
   align-items: center;
-  border-radius: 20px;
-  background: #b5b5ff;
-  padding: 20px 20px 0 10px;
+  gap: 20px;
 }
-.dashboard .banner:first-child .firstBox img {
-  height: 100%;
-  flex: 1;
+
+.dashboard .banner.first-banner .firstBox img {
+  width: 150px;
+  height: 150px;
+  border-radius: 12px;
 }
-.dashboard .banner:first-child .firstBox .content {
-  flex: 2;
-}
-.dashboard .banner:first-child .firstBox .content div {
+
+.dashboard .banner.first-banner .content div {
   display: flex;
   align-items: center;
-  font-size: 34px;
-  margin-bottom: 12px;
+  gap: 10px;
 }
-.dashboard .banner:first-child .firstBox .content div p {
-  margin-right: 10px;
-  font-size: 34px;
-}
-.dashboard .banner:first-child .firstBox .content div h5 {
+
+.dashboard .banner.first-banner .content h5 {
   color: #ff008d;
+  font-size: 1.25rem;
 }
-.dashboard .banner:first-child .firstBox .content p {
-  font-size: 16px;
-}
-.dashboard .banner:first-child .secondBox {
-  background: #3939d9f2;
-  color: #fff;
-}
-.dashboard .banner:first-child .thirdBox {
-  color: #ff008d;
-  background: #fff;
-}
-.dashboard .banner:first-child .secondBox,
-.dashboard .banner:first-child .thirdBox {
-  flex: 1;
-  border-radius: 20px;
-  padding: 20px 25px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 12px;
-}
-.dashboard .banner:first-child .secondBox p,
-.dashboard .banner:first-child .thirdBox p {
-  font-size: 24px;
-  font-weight: 600;
-}
-.dashboard .banner:first-child .secondBox h3,
-.dashboard .banner:first-child .thirdBox h3 {
-  font-size: 34px;
-  font-weight: 700;
-  letter-spacing: 2px;
-}
-.dashboard .banner:last-child {
-  height: 65vh;
+
+.dashboard .banner.appointments-banner {
   background: #fff;
   border-radius: 20px;
-  padding: 40px;
+  padding: 20px;
+  overflow-x: auto;
 }
-.dashboard .banner:last-child h5 {
-  font-size: 24px;
-  letter-spacing: 2px;
-  margin-bottom: 20px;
-  color: #111;
+
+.dashboard .banner.appointments-banner h5 {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
 }
+
 .dashboard .banner table {
   width: 100%;
-  color: #111;
-  font-size: 20px;
+  border-collapse: collapse;
+  min-width: 600px;
 }
+
+.dashboard .banner th,
+.dashboard .banner td {
+  padding: 10px;
+  font-size: 16px;
+  text-align: left;
+}
+
 .dashboard .banner table select {
-  font-size: 20px;
-  border: none;
-  width: 100%;
+  font-size: 16px;
   font-weight: 600;
+  width: 100%;
+  border: none;
 }
-.dashboard table td svg{
+
+.dashboard table td svg {
   display: flex;
   margin: 0 auto;
 }
-.dashboard table td .green{
-  font-size: 20px;
+
+.dashboard table td .green {
   color: #16a34a;
+  font-size: 18px;
 }
-.dashboard table td .red{
-  font-size: 20px;
+
+.dashboard table td .red {
   color: #dc2626;
+  font-size: 18px;
 }
-.dashboard .banner table select:focus {
-  outline: none;
-}
-.dashboard .banner table .value-pending {
+
+.dashboard table .value-pending {
   color: #eab308;
 }
-.dashboard .banner table .value-accepted {
+.dashboard table .value-accepted {
   color: #16a34a;
 }
-.dashboard .banner table .value-rejected {
+.dashboard table .value-rejected {
   color: #dc2626;
 }
-.dashboard .banner table thead {
-  text-align: justify;
-  padding: 12px 0;
-}
-.dashboard .banner table thead th {
-  padding: 12px 0;
-}
-.dashboard .banner table tbody td {
-  padding: 12px 0;
-}
-@media (max-width: 1376px) {
-  .dashboard .banner:first-child .firstBox .content div,
-  .dashboard .banner:first-child .firstBox .content div p {
-    font-size: 26px;
+
+/* -------- Mobile Responsive Table -------- */
+@media (max-width: 768px) {
+  .dashboard .banner table {
+    display: block;
+    overflow-x: auto;
   }
-  .dashboard .banner:first-child .firstBox .content p {
+
+  .dashboard .banner table thead {
+    display: none;
+  }
+
+  .dashboard .banner table tbody,
+  .dashboard .banner table tr,
+  .dashboard .banner table td {
+    display: block;
+    width: 100%;
+  }
+
+  .dashboard .banner table tr {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .dashboard .banner table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
     font-size: 14px;
+    border-bottom: 1px solid #eee;
   }
-  .dashboard .banner:first-child .secondBox p,
-  .dashboard .banner:first-child .thirdBox p,
-  .dashboard .banner:first-child .secondBox h3,
-  .dashboard .banner:first-child .thirdBox h3 {
-    font-size: 20px;
+
+  .dashboard .banner table td:before {
+    content: attr(data-label);
+    font-weight: 700;
+    color: #555;
+    width: 120px;
+    flex-shrink: 0;
   }
-}
-@media (max-width: 1020px) {
-  .dashboard {
-    height: fit-content;
-  }
-  .dashboard .banner:first-child,
-  .dashboard .banner:last-child {
-    flex-wrap: wrap;
-    height: fit-content;
-  }
-  .dashboard .banner:first-child .firstBox {
-    flex: none;
-    width: 100%;
-    height: 265px;
-  }
-  .dashboard .banner:first-child .secondBox,
-  .dashboard .banner:first-child .thirdBox {
-    height: 175px;
+
+  .dashboard .banner table select {
+    font-size: 14px;
+    width: auto;
   }
 }
-@media (max-width: 620px) {
-  .dashboard .banner:first-child .secondBox,
-  .dashboard .banner:first-child .thirdBox {
-    width: 100%;
-    flex: none;
-  }
-}
-@media (max-width: 485px) {
-  .dashboard .banner:first-child .firstBox {
+
+@media (max-width: 480px) {
+  .dashboard .banner table td {
     flex-direction: column;
-    height: fit-content;
-    padding: 20px;
+    align-items: flex-start;
+    gap: 5px;
+    font-size: 13px;
   }
-  .dashboard .banner:first-child .firstBox img {
-    width: 270px;
-    height: 270px;
-    margin-bottom: 25px;
+
+  .dashboard .banner table td:before {
+    width: 100px;
+    font-size: 13px;
   }
-  .dashboard .banner:first-child .firstBox div {
-    justify-content: center;
+
+  .dashboard .banner table select {
+    font-size: 12px;
   }
 }
+
 
 .sidebar {
   position: fixed;
