@@ -16,6 +16,13 @@ const Navbar = () => {
     setUser({});
     if (setToken) setToken(null); // clear token in context
     localStorage.removeItem("token"); // clear token in localStorage
+   
+localStorage.removeItem("user");
+
+setToken(null);
+setUser(null);
+setIsAuthenticated(false);
+
 
     toast.success("Logged out successfully!");
     setShow(false);

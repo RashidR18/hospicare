@@ -38,6 +38,7 @@ const Login = () => {
 
       if (setToken) {
         localStorage.setItem("token", res.data.token);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
 setIsAuthenticated(true);
 setUser(res.data.user);
 

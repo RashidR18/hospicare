@@ -5,9 +5,15 @@ import App from "./App.jsx";
 export const Context = createContext({ isAuthenticated: false, token: "" });
 
 const AppWrapper = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [user, setUser] = useState({});
-  const [token, setToken] = useState(""); // 🔥 store JWT token
+  
+  const storedToken = localStorage.getItem("token");
+const storedUser = localStorage.getItem("user");
+
+const [token, setToken] = useState(storedToken);
+const [user, setUser] = useState(storedUser ? JSON.parse(storedUser) : null);
+const [isAuthenticated, setIsAuthenticated] = useState(!!storedToken);
+
+  
 
   return (
     <Context.Provider
