@@ -1,6 +1,3 @@
-live link patient-facing:- https://hospicarefrontend.vercel.app/
-live link Admin:- https://hospicaredashboard.vercel.app/login
-
 🏥 Hospicare – Hospital Management System
 
 Hospicare is a full-stack hospital management web application built using the MERN stack.
