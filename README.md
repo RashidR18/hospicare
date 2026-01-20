@@ -3,9 +3,6 @@
 Hospicare is a full-stack hospital management web application built using the MERN stack.
 It helps patients book appointments and allows admins to manage doctors, appointments, messages, and users from a separate dashboard.
 
-live link patient-facing:- https://hospicarefrontend.vercel.app/
-
-live link Admin:- https://hospicaredashboard.vercel.app/login
 
 🚀 Live Project Structure
 
@@ -100,49 +97,78 @@ Backend: Vercel / Render
 Database: MongoDB Atlas
 
 📂 Folder Details
+
 📁 backend/
+
 backend/
+
 ├── api/
+
 ├── controller/
+
 ├── router/
+
 ├── models/
+
 ├── middlewares/
+
 ├── database/
+
 ├── utils/
+
 ├── config/
+
 ├── app.js
+
 ├── server.js
+
 └── vercel.json
 
+
 📁 frontend/
+
 frontend/
+
 ├── src/
+
 ├── public/
+
 ├── .env
+
 ├── index.html
+
 └── vite.config.js
 
 📁 dashboard/
+
 dashboard/
+
 ├── src/
+
 ├── public/
+
 ├── .env
+
 ├── index.html
+
 └── vite.config.js
 
 🔐 Environment Variables
+
 Backend (backend/.env)
+
 PORT=5000
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret
-FRONTEND_URL=frontend_vercel_url
-DASHBOARD_URL=dashboard_vercel_url
+
+MONGO_URI=mongodb+srv://rashid:rashid@cluster0.k82k0.mongodb.net/?retryWrites=true
+JWT_SECRET=asjhdkjahkdlfhksahfksad
+FRONTEND_URL=https://hospicarefrontend.vercel.app/
+DASHBOARD_URL=https://hospicaredashboard.vercel.app/login
 
 Frontend (frontend/.env)
-VITE_BACKEND_URL=backend_deployed_url
+VITE_BACKEND_URL=
 
 Dashboard (dashboard/.env)
-VITE_BACKEND_URL=backend_deployed_url
+VITE_BACKEND_URL= 
 
 ▶️ How to Run Locally
 1️⃣ Clone the Repository
@@ -225,6 +251,7 @@ Better UI/UX
 👨‍💻 Author
 
 Rashid Ali
+
 Full Stack Developer (MERN)
 
 ⭐ Support
