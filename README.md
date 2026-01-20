@@ -12,9 +12,13 @@ live link Admin:- https://hospicaredashboard.vercel.app/login
 This repository contains three main folders:
 
 hospicare/
+
 │
+
 ├── backend/     → Node.js + Express API
+
 ├── frontend/    → Patient-facing website (React)
+
 └── dashboard/   → Admin dashboard (React)
 
 ✨ Features
