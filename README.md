@@ -31,6 +31,7 @@ Contact hospital (messages)
 
 Secure authentication using JWT
 
+
 🧑‍💼 Admin (Dashboard)
 
 Admin login
@@ -42,6 +43,7 @@ View and manage appointments
 View patient messages
 
 Role-based authentication (Admin only)
+
 
 ⚙️ Backend
 
@@ -56,6 +58,7 @@ MongoDB database integration
 Secure cookies & tokens
 
 Deployed-ready (Vercel supported)
+
 
 🛠️ Tech Stack
 Frontend & Dashboard
@@ -96,6 +99,7 @@ Backend: Vercel / Render
 
 Database: MongoDB Atlas
 
+
 📂 Folder Details
 
 📁 backend/
@@ -125,6 +129,7 @@ backend/
 └── vercel.json
 
 
+
 📁 frontend/
 
 frontend/
@@ -138,6 +143,8 @@ frontend/
 ├── index.html
 
 └── vite.config.js
+
+
 
 📁 dashboard/
 
@@ -153,6 +160,8 @@ dashboard/
 
 └── vite.config.js
 
+
+
 🔐 Environment Variables
 
 Backend (backend/.env)
@@ -160,9 +169,13 @@ Backend (backend/.env)
 PORT=5000
 
 MONGO_URI=mongodb+srv://rashid:rashid@cluster0.k82k0.mongodb.net/?retryWrites=true
+
 JWT_SECRET=asjhdkjahkdlfhksahfksad
+
 FRONTEND_URL=https://hospicarefrontend.vercel.app/
+
 DASHBOARD_URL=https://hospicaredashboard.vercel.app/login
+
 
 Frontend (frontend/.env)
 VITE_BACKEND_URL=
@@ -170,24 +183,36 @@ VITE_BACKEND_URL=
 Dashboard (dashboard/.env)
 VITE_BACKEND_URL= 
 
+
 ▶️ How to Run Locally
+
 1️⃣ Clone the Repository
+
 git clone https://github.com/your-username/hospicare.git
 cd hospicare
 
+
 2️⃣ Run Backend
+
 cd backend
+
 npm install
+
 npm run dev
+
 
 
 Backend will run on:
 
 http://localhost:5000
 
+
 3️⃣ Run Frontend
+
 cd frontend
+
 npm install
+
 npm run dev
 
 
@@ -195,15 +220,20 @@ Frontend runs on:
 
 http://localhost:5173
 
+
 4️⃣ Run Dashboard
+
 cd dashboard
+
 npm install
+
 npm run dev
 
 
 Dashboard runs on:
 
 http://localhost:5174
+
 
 🌐 Deployment Notes
 
@@ -215,6 +245,7 @@ Cookies are handled securely for production
 
 Token-based login is used for Safari & cross-browser support
 
+
 🧪 Authentication Flow
 
 Login generates JWT token
@@ -224,6 +255,7 @@ Token stored securely (cookie / header)
 Role-based middleware protects admin routes
 
 Separate tokens for Admin and Patient
+
 
 📸 Screenshots
 
@@ -248,11 +280,13 @@ Role-based permissions
 
 Better UI/UX
 
+
 👨‍💻 Author
 
 Rashid Ali
 
 Full Stack Developer (MERN)
+
 
 ⭐ Support
 
