@@ -188,7 +188,7 @@ VITE_BACKEND_URL=
 
 1️⃣ Clone the Repository
 
-git clone https://github.com/your-username/hospicare.git
+git clone https://github.com/RashidR18/hospicare.git
 cd hospicare
 
 
